@@ -10,9 +10,9 @@ Rails.application.routes.draw do
   delete '/sign-out' => 'users#signout'
   patch '/change-password' => 'users#changepw'
 
-  get '/Journal_Entries' => 'Journal_Entries#index'
-  get 'Journal_Entries/:id' => 'Journal_Entries#show'
-  post 'Journal_Entries' => 'Journal_Entries#create'
-  patch 'Journal_Entries/:id' => 'Journal_Entries#update'
-  delete '/Journal_Entries/:id' => 'Journal_Entries#destroy'
+  get '/journals' => 'journals#index'
+  get 'journals/:id' => 'journals#show'
+  post 'journals' => 'journals#create'
+  patch 'journals/:id' => 'journals#update'
+  delete '/journals/:id' => 'journals#destroy'
 end
