@@ -33,12 +33,12 @@ ActiveRecord::Schema.define(version: 2) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
-  create_table "JournalEntries", force: :cascade do |t|
+  create_table "Journals", force: :cascade do |t|
       t.string "Title"
       t.string "Subject"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end
 
-  add_foreign_key "examples", "users", "Journal-Entries"
+  add_foreign_key "examples", "users", "Journals"
 end
