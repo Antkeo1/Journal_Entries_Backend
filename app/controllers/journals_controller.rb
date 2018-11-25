@@ -1,32 +1,51 @@
-# frozen_string_literal: true
-
 class JournalsController < ApplicationController
-  def index
-    @journals = journals.all()
+  before_action :set_journal, only: [:show, :update, :destroy]
 
-    # give book data back to client
+  # GET /journals
+  def index
+    @journals = Journal.all
+
     render json: @journals
   end
 
-  def create
-    @journal = Journal.create(book_params)
-
+  # GET /journals/1
+  def show
     render json: @journal
   end
 
-  def update
-    @journal = Journal.find(params[:id])
+  # POST /journals
+  def create
+    @journal = Journal.new(journal_params)
 
-    if @journal.update(journal_params)
-      render json: @journal
+    if @journal.save
+      render json: @journal, status: :created, location: @journal
     else
-      render json: @journal.error, status: :unprocessable_entity
+      render json: @journal.errors, status: :unprocessable_entity
     end
   end
 
-  def journal_params
-    params.require(:user).permit(:Title, :Subject)
+  # PATCH/PUT /journals/1
+  def update
+    if @journal.update(journal_params)
+      render json: @journal
+    else
+      render json: @journal.errors, status: :unprocessable_entity
+    end
   end
 
-  # private :book_params
+  # DELETE /journals/1
+  def destroy
+    @journal.destroy
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_journal
+      @journal = Journal.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def journal_params
+      params.require(:journal).permit(:title, :subject)
+    end
 end
