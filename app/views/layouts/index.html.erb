@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Journal_Entries</title>
+    <style>
+
+    </style>
+  </head>
+
+  <body>
+    <div class="header">
+      <h1>yourEnTrees.com</h1>
+      <p>Planting seeds in the mind. Grow your EnTrees</p>
+    </div>
+    <div class="dropdown" style='float:left;'>
+      <button class='sign-in'>SignIn</button>
+      <div class="dropdown-content" style='left:0;'>
+        <input type='text' name='credentials[username]' placeholder='username'>
+        <input type='password' name='credentials[password]' placeholder="password">
+        <input type="submit" value="Sign In!">
+      </div>
+    </div>
+
+    <div class="dropdown" style='float:left;'>
+      <button class='sign-out'>SignOut</button>
+    </div>
+
+    <div class="dropdown" style='float:right;'>
+      <button class='savedJournals'>Saved Entries</button>
+    </div>
+
+    <div class="dropdown" style='float:left;'>
+      <button class='sign-up'>SignUp</button>
+      <div class="dropdown-content" style='left:0;'>
+        <input type='text' name='credentials[username]' placeholder='username'>
+        <input type='password' name='credentials[password]' placeholder="password">
+        <input type='password' name='credentials[password]' placeholder="confirm password">
+        <input type="submit" value="Sign Up!">
+      </div>
+    </div>
+
+    <div class="dropdown" style='float:right;'>
+      <button class='change-password'>ChangePassword</button>
+      <div class="dropdown-content" style='right:0;'>
+        <input type='password' name='credentials[password]' placeholder="oldpassword">
+        <input type='password' name='credentials[password]' placeholder="newpassword">
+        <input type="submit" value="ChangePassword">
+      </div>
+    </div>
+
+    <main class='mainContent'>
+    <h1>How are you feeling?</h1>
+    <div class='journalEntry'>
+      <form>
+        <input type='text' name='Title' placeholder="Title">
+        <input type="text" name="Subject" placeholder="Subject">
+      </form>
+      <textarea id='toType'></textarea>
+      <button id='save-button'>save</button>
+    </div>
+  </main>
+
+  <% flash.each do |key,value| %>
+  <p><%- value %></p>
+  <% end %>
+
+  <%- yield %>
+
+  </body>
+</html>

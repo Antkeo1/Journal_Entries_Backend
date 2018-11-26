@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class JournalsController < ApplicationController
-  before_action :set_journal, only: [:show, :update, :destroy]
+  before_action :set_journal, only: %i[show update destroy]
 
   # GET /journals
   def index
@@ -39,13 +41,14 @@ class JournalsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_journal
-      @journal = Journal.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def journal_params
-      params.require(:journal).permit(:title, :subject)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_journal
+    @journal = Journal.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def journal_params
+    params.require(:journal).permit(:title, :subject)
+  end
 end
