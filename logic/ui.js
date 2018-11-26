@@ -8,11 +8,6 @@ const signUpSuccess = data => {
   $('#message').removeClass()
   $('#message').addClass('success')
   console.log('signUpSuccess ran. Data is :', data)
-  $('h2').text('Sign Up Success Please Sign in').show()
-  $('.create-game').on('click', function () {
-    $('.gameContent').show()
-    $('h2').text('').hide()
-  })
 }
 
 const signUpFailure = error => {
@@ -28,13 +23,6 @@ const signInSuccess = data => {
   $('#message').text('Signed in successfully')
   $('#message').removeClass()
   $('#message').addClass('success')
-  $('.border, .border2').hide()
-  $('.border3, .border4').show()
-  $('h2').text('Sign In Success').show()
-  $('.create-game').on('click', function () {
-    $('.gameContent, .grid-container, .not-a-game-board, .heading, .reset, .winner, .draw, .grid').show()
-    $('h2').text('').hide()
-  })
   console.log('signInSuccess ran. Data is :', data)
 }
 
@@ -68,10 +56,6 @@ const signOutSuccess = data => {
   store.user = null
   $('#message').removeClass()
   $('#message').addClass('success')
-  $('.border, .border2').show()
-  $('.border3, .border4').hide()
-  $('.heading, .grid').hide()
-  $('h2').text('Sign in Success').hide()
   console.log('signOutSuccess ran. Data is :', data)
 }
 

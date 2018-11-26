@@ -2,6 +2,6 @@
 
 class AddUserToJournals < ActiveRecord::Migration[5.2]
   def change
-    add_reference :users, :journals, foreign_key: true
+    add_reference :journals, :users, foreign_key: true
   end
 end
