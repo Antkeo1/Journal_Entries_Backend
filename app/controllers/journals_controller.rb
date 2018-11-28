@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class JournalsController < ApplicationController
+class JournalsController < ProtectedController
   before_action :set_journal, only: %i[show update destroy]
 
   # GET /journals
@@ -12,15 +12,15 @@ class JournalsController < ApplicationController
 
   # GET /journals/1
   def show
-    render json: @journal
+    render json: Journal.find(params[:id])
   end
 
   # POST /journals
   def create
-    @journal = Journal.new(journal_params)
+    @journal = current_user.journals.build(journal_params)
 
     if @journal.save
-      render json: @journal, status: :created, location: @journal
+      render json: @journal, status: :created, location: @journals
     else
       render json: @journal.errors, status: :unprocessable_entity
     end

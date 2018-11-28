@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 2018_11_25_164316) do
     t.string "subject"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "users_id"
+    t.index ["users_id"], name: "index_journals_on_users_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -36,12 +38,10 @@ ActiveRecord::Schema.define(version: 2018_11_25_164316) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "journals_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["journals_id"], name: "index_users_on_journals_id"
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
   add_foreign_key "examples", "users"
-  add_foreign_key "users", "journals", column: "journals_id"
+  add_foreign_key "journals", "users", column: "users_id"
 end
