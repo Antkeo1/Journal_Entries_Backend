@@ -17,10 +17,11 @@ class JournalsController < ProtectedController
 
   # POST /journals
   def create
-    @journal = current_user.journals.build(journal_params)
+
+    @journal = current_user.journals.build(params[:id, :title, :subject, :text])
 
     if @journal.save
-      render json: @journal, status: :created, location: @journals
+      render json: @journal, status: :created, location: @journal
     else
       render json: @journal.errors, status: :unprocessable_entity
     end
@@ -40,7 +41,7 @@ class JournalsController < ProtectedController
     @journal.destroy
   end
 
-  private
+  #private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_journal
@@ -49,6 +50,6 @@ class JournalsController < ProtectedController
 
   # Only allow a trusted parameter "white list" through.
   def journal_params
-    params.require(:journal).permit(:title, :subject)
+    params.require(:journal).permit(:title, :subject, :text)
   end
 end

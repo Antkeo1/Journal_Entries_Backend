@@ -9,6 +9,7 @@ curl "http://localhost:4741/journals" \
     "journal": {
       "title": "'"${TITLE}"'",
       "subject": "'"${SUBJECT}"'"
+      "text": "'"${TEXT}"'"
     }
   }'
 
