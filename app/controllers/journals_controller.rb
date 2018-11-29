@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 class JournalsController < ProtectedController
-  before_action :set_journal, only: %i[show update destroy]
+  before_action :set_journal, only: [:show, :update, :destroy]
 
   # GET /journals
   def index
@@ -12,13 +10,12 @@ class JournalsController < ProtectedController
 
   # GET /journals/1
   def show
-    render json: Journal.find(params[:id])
+    render json: @journal
   end
 
   # POST /journals
   def create
-
-    @journal = current_user.journals.build(params[:id, :title, :subject, :text])
+    @journal = current_user.journals.build(journal_params)
 
     if @journal.save
       render json: @journal, status: :created, location: @journal
@@ -41,15 +38,14 @@ class JournalsController < ProtectedController
     @journal.destroy
   end
 
-  #private
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_journal
+      @journal = Journal.find(params[:id])
+    end
 
-  # Use callbacks to share common setup or constraints between actions.
-  def set_journal
-    @journal = Journal.find(params[:id])
-  end
-
-  # Only allow a trusted parameter "white list" through.
-  def journal_params
-    params.require(:journal).permit(:title, :subject, :text)
-  end
+    # Only allow a trusted parameter "white list" through.
+    def journal_params
+      params.require(:journal).permit(:title, :subject, :text)
+    end
 end
