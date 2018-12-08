@@ -1,5 +1,5 @@
 class JournalsController < ProtectedController
-  before_action :set_journal, only: [:show, :update, :destroy]
+  before_action :set_journal, only: [:update, :destroy]
 
   # GET /journals
   def index
@@ -10,6 +10,7 @@ class JournalsController < ProtectedController
 
   # GET /journals/1
   def show
+    @journal = Journal.find_by(params[:title])
     render json: @journal
   end
 
@@ -45,7 +46,7 @@ class JournalsController < ProtectedController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def journal_params
+      def journal_params
       params.require(:journal).permit(:title, :subject, :text)
     end
 end
