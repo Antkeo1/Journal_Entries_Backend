@@ -10,7 +10,9 @@ class JournalsController < ProtectedController
 
   # GET /journals/1
   def show
-    @journal = Journal.find_by(params[:title])
+    puts params[:title]
+    @journal = current_user.journals.find_by(title: params[:title])
+    puts @journal
     render json: @journal
   end
 
@@ -42,7 +44,7 @@ class JournalsController < ProtectedController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_journal
-      @journal = Journal.find(params[:id])
+      @journal = current_user.journals.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

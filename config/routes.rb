@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   patch '/change-password' => 'users#changepw'
 
   get '/journals' => 'journals#index'
-  get 'journals/:id' => 'journals#show'
-  post 'journals' => 'journals#create'
-  patch 'journals/:id' => 'journals#update'
+  get '/show-journal/:title' => 'journals#show'
+  post '/journals' => 'journals#create'
+  patch '/journals/:id' => 'journals#update'
   delete '/journals/:id' => 'journals#destroy'
 end
